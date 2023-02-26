@@ -54,16 +54,6 @@ public class SuperTrendDemoApplication {
 		double multiplier = 2;
 		int lookbackPeriod = 7;
 
-		// placeorder parameters
-		int quantity = 1;
-		String orderType = "LIMIT";
-		String tradingSymbol = "CRUDEOIL23MARFUT";
-		String product = "NRML"; // MIS, CNC
-		String exchange = "MCX";
-		String transactionType = "BUY"; // BUY or SELL
-		String validity = "DAY";
-		Double price = 1.0;
-		Double triggeredPrice = 0.0;
 		try {
 			// Create kite connect object by creating session.
 			KiteConnect kiteConnect = new KiteConnect(apiKey);
@@ -72,9 +62,13 @@ public class SuperTrendDemoApplication {
 			kiteConnect.setAccessToken(user.accessToken);
 			kiteConnect.setPublicToken(user.publicToken);
 			System.out.println("User session created and algo started at : " + new java.util.Date());
-			placeOrder("buy", kiteConnect, quantity, orderType, tradingSymbol, product, exchange, transactionType,
-					validity, price, triggeredPrice);
+
+			placeOrder("buy", kiteConnect, Constants.QUANTITY, Constants.ORDER_TYPE_LIMIT, Constants.TRADINGSYMBOL,
+					Constants.PRODUCT_NRML, Constants.EXCHANGE_MCX, Constants.TRANSACTION_TYPE_BUY,
+					Constants.VALIDITY_DAY, Constants.PRICE, Constants.TRIGGEREDPRICE);
+
 			System.exit(0);
+
 			// Get all tokens that need to be subscribed to.
 			ArrayList<Long> tokens = new ArrayList<Long>();
 			tokens.add(Long.parseLong(bankNiftyToken));
