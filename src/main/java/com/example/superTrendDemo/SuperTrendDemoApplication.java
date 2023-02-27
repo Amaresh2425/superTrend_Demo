@@ -40,15 +40,15 @@ public class SuperTrendDemoApplication {
 
 		// Change Daily by hitting
 		// https://kite.trade/connect/login?api_key=n2tkas121jwtsnce
-		String request_token = "HIZnfi67xSdIo7mmlkJaADwGnzt5bArv";
+		String request_token = "58c4tg8UGjMWs2TEQmdyiaTpFLS8VXIi";
 
 		// Configurable Values
 		String apiKey = "n2tkas121jwtsnce";
 		String apiSecretKey = "pmocmymbss3odcwxqwvtohosgwinut6v";
 		String appUserid = "LUY532";
-		String bankNiftyToken = "63333895";
-		int startHrs = 21;
-		int startMins = 36;
+		String bankNiftyToken = "64087559";
+		int startHrs = 17;
+		int startMins = 6;
 		int startSecs = 00;
 		int interval = 1;
 		double multiplier = 2;
@@ -63,9 +63,13 @@ public class SuperTrendDemoApplication {
 			kiteConnect.setPublicToken(user.publicToken);
 			System.out.println("User session created and algo started at : " + new java.util.Date());
 
-			placeOrder("buy", kiteConnect, Constants.QUANTITY, Constants.ORDER_TYPE_LIMIT, Constants.TRADINGSYMBOL,
-					Constants.PRODUCT_NRML, Constants.EXCHANGE_MCX, Constants.TRANSACTION_TYPE_BUY,
-					Constants.VALIDITY_DAY, Constants.PRICE, Constants.TRIGGEREDPRICE);
+			/*
+			 * placeOrder(kiteConnect, Constants.QUANTITY, Constants.ORDER_TYPE_LIMIT,
+			 * Constants.TRADINGSYMBOL, Constants.PRODUCT_NRML, Constants.EXCHANGE_NSE,
+			 * Constants.TRANSACTION_TYPE_BUY, Constants.VALIDITY_DAY, Constants.PRICE,
+			 * Constants.TRIGGEREDPRICE);
+			 */
+			placeOrder(kiteConnect);
 
 			System.exit(0);
 
@@ -245,22 +249,40 @@ public class SuperTrendDemoApplication {
 	}
 
 	// API for placing the order
-	public static void placeOrder(String direction, KiteConnect kiteConnect, int quantity, String orderType,
-			String tradingSymbol, String product, String exchange, String transactionType, String validity,
-			Double price, Double triggeredPrice) throws JSONException, IOException, KiteException {
+	/*
+	 * public static void placeOrder(KiteConnect kiteConnect, int quantity, String
+	 * orderType, String tradingSymbol, String product, String exchange, String
+	 * transactionType, String validity, Double price, Double triggeredPrice) throws
+	 * IOException, KiteException {
+	 * 
+	 * OrderParams orderParams = new OrderParams(); orderParams.quantity = quantity;
+	 * orderParams.orderType = orderType; orderParams.tradingsymbol = tradingSymbol;
+	 * orderParams.product = product; orderParams.exchange = exchange;
+	 * orderParams.transactionType = transactionType; orderParams.validity =
+	 * validity; orderParams.price = price; orderParams.triggerPrice =
+	 * triggeredPrice; orderParams.tag = "myTag"; orderParams.disclosedQuantity = 0;
+	 * Order order = kiteConnect.placeOrder(orderParams, Constants.VARIETY_REGULAR);
+	 * System.out.println(order.orderId); alertCandleData.clear(); }
+	 */
 
+	public static void placeOrder(KiteConnect kiteConnect) throws JSONException, IOException, KiteException {
 		OrderParams orderParams = new OrderParams();
-		orderParams.quantity = quantity;
-		orderParams.orderType = orderType;
-		orderParams.tradingsymbol = tradingSymbol;
-		orderParams.product = product;
-		orderParams.exchange = exchange;
-		orderParams.transactionType = transactionType;
-		orderParams.price = price;
-		orderParams.triggerPrice = triggeredPrice;
-		orderParams.validity = validity;
-		Order order = kiteConnect.placeOrder(orderParams, "regular");
+		orderParams.quantity = Constants.QUANTITY;
+		orderParams.orderType = Constants.ORDER_TYPE_LIMIT;
+		orderParams.tradingsymbol = Constants.TRADINGSYMBOL;
+		orderParams.product = Constants.PRODUCT_MIS;
+		orderParams.exchange = Constants.EXCHANGE_NSE;
+		orderParams.transactionType = Constants.TRANSACTION_TYPE_SELL;
+		orderParams.validity = Constants.VALIDITY_DAY;
+		orderParams.price = Constants.PRICE;
+		orderParams.triggerPrice = Constants.TRIGGEREDPRICE;
+		orderParams.tag = "myTag";
+		orderParams.disclosedQuantity = 0;
+		Order order = kiteConnect.placeOrder(orderParams, Constants.VARIETY_REGULAR);
 		System.out.println(order.orderId);
+		System.out.println(order.status);
+
 		alertCandleData.clear();
 	}
+
 }
