@@ -26,11 +26,11 @@ public class SuperTrend {
 	}
 
 	public SuperTrend(BarSeries series) {
-		this(series, 3.0, 10);
+		this(series, 2.0, 7);
 	}
 
 	public SuperTrend(BarSeries series, Double multiplier) {
-		this(series, multiplier, 10);
+		this(series, multiplier, 7);
 	}
 
 	private void calculate() {
