@@ -6,7 +6,7 @@ public class Constants {
 	public static final String PRODUCT_CNC = "CNC";
 	public static final String PRODUCT_NRML = "NRML";
 	public static final int QUANTITY = 1;
-	public static final String TRADINGSYMBOL = "GOLDM23MARFUT";
+	public static final String TRADINGSYMBOL = "260105";
 	public static final double PRICE = 1.0;
 	public static final double TRIGGEREDPRICE = 0.0;
 
